@@ -119,13 +119,23 @@ export default function Main02(){
         }
         content = <Article title={title} body={body} />;
         //모드가 READ일때만 수정,삭제를 나오게하자
-        //하나를 수정하기 위해서는 아이다기 팔요하다.
+        //하나를 수정하기 위해서는 아이디가 팔요하다.
        // contextControl = <li><a href={/update/+id}>Update</a></li>
         contextControl=<>
             <li><a href={"/update/"+id} onClick={(e)=>{
                 e.preventDefault();
                 setMode('UPDATE');
             }}>Update</a></li>
+            <li><input type="button" value="Delete" onClick={()=>{
+                //선택한 객체를 뺀 나머지를 담고 보여주기 위해서
+                const newTops=[];
+                for (let i = 0; i < top.length; i++) {
+                    if(top[i].id !== Number(id)){
+                        newTops.push(top[i]);
+                    }
+                }
+                setTop(newTops);
+            }}/></li>
         </>
 
     }else if(mode === 'CREATE'){
